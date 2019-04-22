@@ -1,4 +1,4 @@
-package org.treasuremap;
+package java.org.treasuremap;
 
 public class Main {
 }
