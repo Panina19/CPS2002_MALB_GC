@@ -14,4 +14,13 @@ public class Calculator {
         if (b!=0) return a/b;
         else throw new IllegalArgumentException("Second parameter cannot be 0");
     }
+
+    public int pow(int a, int b) {
+        return (int)Math.pow(a,b);
+    }
+
+    public int factorial(int a) {
+        if(a==1) return 1;
+        return a*factorial(a-1);
+    }
 }
