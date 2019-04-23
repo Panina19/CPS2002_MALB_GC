@@ -1,7 +1,3 @@
 /.idea/
 TreasureMapGame.iml
-**/classes/
-**/generated-classes/
-**/maven-archiver/
-**/maven-status/
-**/surefire-reports/
+/target/
