@@ -1,11 +1,11 @@
-package game.board;
+package board;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.org.treasuremap.board.Map;
+import org.treasuremap.board.Map;
 
 import static org.junit.Assert.fail;
 
@@ -24,14 +24,14 @@ public class MapTest {
 
     @Test
     public void getExistingTileTypeTest() {
-        Assert.assertNotEquals(0,map.getTileType(0,0));
-        Assert.assertNotEquals(0,map.getTileType(5,5));
-        Assert.assertNotEquals(0,map.getTileType(9,9));
+        Assert.assertNotNull(map.getTileType(0,0));
+        Assert.assertNotNull(map.getTileType(5,5));
+        Assert.assertNotNull(map.getTileType(9,9));
     }
 
-    @Test(expected = InvalidCoordinatesException.class)
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void getOutOfRangeTileTypeTest() {
-        Assert.assertEquals(0, map.getTyileType(10,10));
+        Assert.assertNull(map.getTileType(10,10));
     }
 
 }
