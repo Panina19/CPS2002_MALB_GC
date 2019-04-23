@@ -1,4 +1,4 @@
-package java.org.treasuremap.game;
+package org.treasuremap.game;
 
 public class Game {
     private static int turns;
