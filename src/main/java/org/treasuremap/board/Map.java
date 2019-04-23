@@ -20,10 +20,6 @@ public class Map {
         generate();
     }
 
-    public int test() {
-        return 5;
-    }
-
     public Tile getTileType(int x, int y) {
         return map[x][y];
     }
