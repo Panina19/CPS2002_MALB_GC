@@ -24,7 +24,9 @@ public class MapTest {
 
     @Test
     public void getExistingTileTypeTest() {
+        Assert.assertNotNull(map.getTileType(0,5));
         Assert.assertNotNull(map.getTileType(5,5));
+        Assert.assertNotNull(map.getTileType(9,5));
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
