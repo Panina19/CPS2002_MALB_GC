@@ -10,7 +10,6 @@ import org.junit.Test;
 public class PlayerTest{
     private Player player;
 
-
     /**
      * Sets up a new object of type Player, with the size of map as 10 and the player's position at (5,5)
      */
