@@ -3,23 +3,30 @@ package org.treasuremap;
 import java.util.Scanner;
 
 public class Main {
-    public static int playerCount;
-    public static int mapSize;
-    public static Scanner scan = new Scanner(System.in);
+    private static int playerCount;
+    private static int mapSize;
+    private static Scanner scan;
 
-    public static void validatePlayerCount() {
-
+    public static boolean validatePlayerCount(int playerCount) {
+        return (playerCount>=2 && playerCount<=8);
     }
 
-    public static void validateMapSize() {
-
+    public static boolean validateMapSize(int playerCount, int mapSize) {
+        if (playerCount>=2 && playerCount<=4) {
+            return (mapSize>=5 && mapSize<=50);
+        }
+        else return (mapSize>=8 && mapSize<=50);
     }
 
     private static void gameQuestionPlayers() {
         System.out.println("How many players?");
         try {
+            scan = new Scanner(System.in);
             playerCount = scan.nextInt();
-            validatePlayerCount();
+            if (!validatePlayerCount(playerCount)) {
+                System.out.println("Must have between 2 and 8 players.");
+                gameQuestionPlayers();
+            }
         } catch (Exception e) {
             System.out.println("Invalid input, let's try that again!");
             gameQuestionPlayers();
@@ -29,8 +36,14 @@ public class Main {
     private static void gameQuestionMapSize() {
         System.out.println("How big should the map be?");
         try {
+            scan = new Scanner(System.in);
             mapSize = scan.nextInt();
-            validateMapSize();
+            if (!validateMapSize(playerCount, mapSize)) {
+                System.out.println("Map size restrictions:\n" +
+                        "2-4 players: min 5x5 - max 50x50\n" +
+                        "5-8 players: min 8x8 - max 50x50");
+                gameQuestionMapSize();
+            }
         } catch (Exception e) {
             System.out.println("Invalid input, let's try that again!");
             gameQuestionMapSize();
