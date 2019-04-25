@@ -63,4 +63,13 @@ public class Position {
     public int getY(){
         return yCoord;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (obj instanceof Position)
+            return (this.xCoord==((Position) obj).getX() && this.yCoord==((Position) obj).getY());
+        return false;
+    }
 }

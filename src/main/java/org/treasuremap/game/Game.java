@@ -36,8 +36,9 @@ public class Game {
     private static void loop() {
         while (!exit) {
             for (Player p : players) {
-                // Ask directions
-                askMovement(p);
+                Position before = p.getPosition();
+                // Move player
+                p.move(askMovement(p));
 
                 // Uncover tile
 
