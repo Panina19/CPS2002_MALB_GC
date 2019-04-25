@@ -1,4 +1,4 @@
-package org.treasuremap;
+package org.treasuremap.board;
 
 public class Position {
 

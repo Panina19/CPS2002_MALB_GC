@@ -1,9 +1,12 @@
 package org.treasuremap.game;
 
+import org.treasuremap.Player.Player;
+import org.treasuremap.board.Map;
+
 public class Game {
     private static int turns;
-//    private static Player [] players;
-//    private static  Map map;
+    private static Player[] players;
+    private static Map map;
 
 
 

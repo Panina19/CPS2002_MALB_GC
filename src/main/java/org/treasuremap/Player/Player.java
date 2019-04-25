@@ -1,5 +1,5 @@
 package org.treasuremap.Player;
-import org.treasuremap.Position;
+import org.treasuremap.board.Position;
 
 public class Player {
 

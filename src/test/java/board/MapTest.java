@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.treasuremap.board.Map;
+import org.treasuremap.board.Tile;
 
 import static org.junit.Assert.fail;
 
@@ -34,4 +35,14 @@ public class MapTest {
         Assert.assertNull(map.getTileType(10,10));
     }
 
+    @Test
+    public void randomGrassPositionIsGrassTest() {
+        Assert.assertEquals(Tile.GRASS, map.randomGrassPosition());
+    }
+
+    @Test
+    public void randomGrassPositionInMapTest() {
+        Assert.assertTrue(map.randomGrassPosition().getX()>=0 && map.randomGrassPosition().getX()<map.getSize());
+        Assert.assertTrue(map.randomGrassPosition().getY()>=0 && map.randomGrassPosition().getY()<map.getSize());
+    }
 }

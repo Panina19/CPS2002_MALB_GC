@@ -2,12 +2,6 @@ package org.treasuremap.board;
 
 import java.util.Random;
 
-enum Tile {
-    WATER,
-    GRASS,
-    TREASURE
-}
-
 public class Map {
     private int size;
     private Tile[][] map;
@@ -39,5 +33,9 @@ public class Map {
                     map[i][j] = r.nextInt(10) < 9 ? Tile.GRASS : Tile.WATER;
             }
         }
+    }
+
+    public int getSize() {
+        return size;
     }
 }
