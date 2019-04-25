@@ -2,6 +2,7 @@ package org.treasuremap.game;
 
 import org.treasuremap.Player.Player;
 import org.treasuremap.board.Map;
+import org.treasuremap.board.Position;
 
 public class Game {
     private static int turns;
@@ -11,6 +12,8 @@ public class Game {
 
 
     public static void start(int playerCount, int mapSize) {
+        players = new Player[playerCount];
+
         // Generate Map
         // TODO: map object
 
@@ -35,6 +38,11 @@ public class Game {
     }
 
 
-    private static void createPlayers(int playerCount) {}
+    private static void createPlayers(int playerCount) {
+        for (int i=0; i<playerCount; i++) {
+            Position p = map.randomGrassPosition();
+            players[i] = new Player(p.getX(), p.getY(), map.getSize());
+        }
+    }
     private static void generateHTMLFiles() {}
 }
