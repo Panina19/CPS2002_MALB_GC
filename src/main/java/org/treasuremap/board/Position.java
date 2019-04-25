@@ -33,6 +33,15 @@ public class Position {
     }
 
     /**
+     * Constructor of a Position object to copy the coords of a different Position object.
+     * @param p - represents the Position object used to copy the coords
+     */
+    public Position(Position p) {
+        this.xCoord = p.getX();
+        this.yCoord = p.getY();
+    }
+
+    /**
      * Sets the x coordinate value of the position
      * @param xCoord - the x coordinate value to be set to
      */

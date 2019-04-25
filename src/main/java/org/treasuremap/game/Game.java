@@ -36,9 +36,8 @@ public class Game {
     private static void loop() {
         while (!exit) {
             for (Player p : players) {
-                Position before = p.getPosition();
                 // Move player
-                p.move(askMovement(p));
+                movePlayer(p);
 
                 // Uncover tile
 
@@ -59,6 +58,15 @@ public class Game {
         else {
             System.out.println("Invalid movement option, try again");
             return askMovement(p);
+        }
+    }
+
+    private static void movePlayer(Player p) {
+        Position before = new Position(p.getPosition());
+        p.move(askMovement(p));
+        if(before.equals(p.getPosition())) {
+            System.out.println("Cannot move out of map! Try again.");
+            movePlayer(p);
         }
     }
 
