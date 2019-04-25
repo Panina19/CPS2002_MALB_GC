@@ -37,7 +37,7 @@ public class MapTest {
 
     @Test
     public void randomGrassPositionIsGrassTest() {
-        Assert.assertEquals(Tile.GRASS, map.randomGrassPosition());
+        Assert.assertEquals(Tile.GRASS, map.getTileType(map.randomGrassPosition()));
     }
 
     @Test
