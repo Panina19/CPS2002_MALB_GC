@@ -1,5 +1,7 @@
 package org.treasuremap;
 
+import org.treasuremap.game.Game;
+
 import java.util.Scanner;
 
 public class Main {
@@ -48,5 +50,12 @@ public class Main {
             System.out.println("Invalid input, let's try that again!");
             gameQuestionMapSize();
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("-- TREASURE MAP --");
+        gameQuestionPlayers();
+        gameQuestionMapSize();
+        Game.start(playerCount, mapSize);
     }
 }
