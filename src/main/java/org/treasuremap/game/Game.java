@@ -20,7 +20,7 @@ public class Game {
         exit = false;
 
         // Generate Map
-        // TODO: map object
+        map = new Map(mapSize);
 
         // Create Players
         createPlayers(playerCount);
