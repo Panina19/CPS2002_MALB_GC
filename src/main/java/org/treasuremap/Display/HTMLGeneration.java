@@ -63,7 +63,7 @@ public class HTMLGeneration {
      * @param players array of different players playing the game
      * @param playerNo current player
      * @param map map of the game
-     * @param turnNo current round number
+     * @param turnNo current round number of game
      */
     private void writeHTMLFile(
             BufferedWriter bw, Player[] players, int playerNo, Map map, int turnNo) {
