@@ -50,4 +50,13 @@ public class Map {
     public int getSize() {
         return size;
     }
+
+    public void setMapSize(int size){
+        this.size = size;
+    }
+    public void setMap(Tile[][] tileMap) {
+        if(tileMap.length == map.length && tileMap[0].length == map[0].length) {
+            map = tileMap;
+        }
+    }
 }

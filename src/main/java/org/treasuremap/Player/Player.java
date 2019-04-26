@@ -50,6 +50,21 @@ public class Player {
     }
 
     /**
+     * Used to get the player's map of visited tiles
+     * @return tilesVisited 2d boolean array
+     */
+    public boolean[][] getTilesVisited(){
+        return tilesVisited;
+    }
+
+    /**
+     * Sets the player's tilesVisited array depending on the parameters below. Useful for tests.
+     * @param newTilesVisited - the updated 2d boolean array
+     */
+    public void setTilesVisited(boolean[][] newTilesVisited){
+        tilesVisited = newTilesVisited;
+    }
+    /**
      * Tries to move the player 1 tile to the specified direction. If it goes out of the map boundaries or is an
      * invalid character then the player doesn't move. When the move is valid, the player's position is updated.
      * @param direction - a character indicating which tile the player should move to.

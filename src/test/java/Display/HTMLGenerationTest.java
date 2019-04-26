@@ -7,6 +7,7 @@ import org.treasuremap.Display.HTMLGeneration;
 import org.treasuremap.Player.Player;
 import org.treasuremap.board.Map;
 import org.treasuremap.board.Position;
+import org.treasuremap.board.Tile;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +26,7 @@ public class HTMLGenerationTest {
     @Before
     public void setup() {
         turnNo = 1;
-        mapSize = 10;
+        mapSize = 5;
         playerNo = 0;
         player = new Player(0, 0,mapSize);
         map = new Map(mapSize);         
@@ -33,7 +34,7 @@ public class HTMLGenerationTest {
         players[0] = player;
         tilesVisited = new boolean[mapSize][mapSize];
         htmlGen = null;
-        htmlGen = new HTMLGeneration();
+        htmlGen = new HTMLGeneration(players, playerNo, map, turnNo);
     }
 
     @After
@@ -59,26 +60,27 @@ public class HTMLGenerationTest {
                 {true ,false,true ,false,true },
                 {false,false,true ,false,true },
                 {true ,true ,true ,true ,true }};
-        char [][] tileMap = {
-                {'G','W','G','G','G'},
-                {'G','W','G','G','G'},
-                {'G','G','T','G','W'},
-                {'G','G','G','G','G'},
-                {'G','W','G','G','G'}
+        player.setTilesVisited(tilesVisited);
+        Tile [][] tileMap = {
+                {Tile.GRASS,Tile.WATER,Tile.GRASS,Tile.GRASS,Tile.GRASS},
+                {Tile.GRASS,Tile.WATER,Tile.GRASS,Tile.GRASS,Tile.GRASS},
+                {Tile.GRASS,Tile.GRASS,Tile.TREASURE,Tile.GRASS,Tile.WATER},
+                {Tile.GRASS,Tile.GRASS,Tile.GRASS,Tile.GRASS,Tile.GRASS},
+                {Tile.GRASS,Tile.WATER,Tile.GRASS,Tile.GRASS,Tile.GRASS}
         };
         map.setMap(tileMap);
         String colour = htmlGen.getTileColour(0,0,map,tilesVisited);
-        assertEquals("GREEN",colour);
+        assertEquals("bgcolor = #00FF00",colour);
         colour = htmlGen.getTileColour(0,1,map,tilesVisited);
-        assertEquals("BLUE",colour);
+        assertEquals("bgcolor = #00FFFF",colour);
         colour = htmlGen.getTileColour(2,2,map,tilesVisited);
-        assertEquals("YELLOW",colour);
+        assertEquals("bgcolor = #FFFF00",colour);
         colour = htmlGen.getTileColour(1,1,map,tilesVisited);
-        assertEquals("GRAY",colour);
+        assertEquals("bgcolor = #C4C4C4",colour);
     }
 
     @Test
-    public void isPlayerHereTest(){
+    public void isPlayerOnTileTest(){
         xPos = 0;
         yPos = 3;
         players[playerNo] = new Player(xPos,yPos,mapSize);
@@ -86,9 +88,9 @@ public class HTMLGenerationTest {
         playerPos.setX(xPos);
         playerPos.setY(yPos);
 
-        String playerMarker = htmlGen.isPlayerOnTile();
-        assertEquals("P",playerMarker);
-        playerMarker = htmlGen.isPlayerOnTile();
+        String playerMarker = htmlGen.isPlayerOnTile(players, playerNo, xPos, yPos);
+        assertEquals("<i class='fas fa-male' style='font-size:24px'></i>",playerMarker);
+        playerMarker = htmlGen.isPlayerOnTile(players, playerNo, 0, 0);
         assertEquals("",playerMarker);
     }
 }
