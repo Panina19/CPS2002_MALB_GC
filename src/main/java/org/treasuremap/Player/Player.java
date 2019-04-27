@@ -26,6 +26,8 @@ public class Player {
         tilesVisited =  new boolean[mapSize][mapSize];
 
         position = new Position(xCoord,yCoord);
+        setPosition(getPosition().getX(),getPosition().getY());
+
         this.mapSize = mapSize;
     }
 
