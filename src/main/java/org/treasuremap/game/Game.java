@@ -1,5 +1,6 @@
 package org.treasuremap.game;
 
+import org.treasuremap.Display.HTMLGeneration;
 import org.treasuremap.Player.Player;
 import org.treasuremap.board.Map;
 import org.treasuremap.board.Position;
@@ -16,6 +17,7 @@ public class Game {
 
 
     public static void start(int playerCount, int mapSize) {
+        turns=0;
         players = new Player[playerCount];
         exit = false;
 
@@ -35,6 +37,7 @@ public class Game {
 
     private static void loop() {
         while (!exit) {
+            turns++;
             for (Player p : players) {
                 // Move player
                 movePlayer(p);
@@ -77,5 +80,8 @@ public class Game {
             players[i] = new Player(p.getX(), p.getY(), map.getSize());
         }
     }
-    private static void generateHTMLFiles() {}
+    private static void generateHTMLFiles() {
+        for (int i=0; i<players.length; i++)
+            new HTMLGeneration(players, i, map, turns);
+    }
 }
