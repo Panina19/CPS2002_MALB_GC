@@ -5,11 +5,14 @@ import org.treasuremap.Player.Player;
 import org.treasuremap.board.Map;
 import org.treasuremap.board.Position;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
     private static int turns;
     private static Player[] players;
+    private static List<Player> winners;
     private static Map map;
     private static boolean exit;
     private static Scanner scan;
@@ -23,6 +26,7 @@ public class Game {
     public static void start(int playerCount, int mapSize) {
         turns=0;
         players = new Player[playerCount];
+        winners = new ArrayList<Player>();
         exit = false;
 
         // Generate Map
@@ -52,11 +56,18 @@ public class Game {
             for (Player p : players) {
                 // Move player
                 movePlayer(p);
+            }
 
-                // Uncover tile
-
-                // Check tile type and perform movement
-
+            for (Player p : players) {
+                switch (map.getTileType(p.getPosition())) {
+                    case TREASURE:
+                        winners.add(p);
+                        break;
+                    case WATER:
+                        p.setPosition(p.getStartPosition());
+                    case GRASS: break;
+                    default: break;
+                }
             }
         }
     }
@@ -103,7 +114,7 @@ public class Game {
     private static void createPlayers(int playerCount) {
         for (int i=0; i<playerCount; i++) {
             Position p = map.randomGrassPosition();
-            players[i] = new Player(p.getX(), p.getY(), map.getSize());
+            players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1);
         }
     }
 

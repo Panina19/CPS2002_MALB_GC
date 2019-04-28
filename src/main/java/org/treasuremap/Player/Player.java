@@ -6,12 +6,16 @@ public class Player {
     /**
      * The global variables declared here are:
      * mapSize:         Useful fot the tileVisited 2-d array, and checking if a player is within bound of the map
-     * Position:        Each player will be placed in a specific x and y coordinate on the map
+     * playerNumber:    Unique identifier for each player
+     * startPosition:   Indicates the position each player started the game at
+     * position:        Each player will be placed in a specific x and y coordinate on the map
      * tilesVisited:    A boolean 2-d array which shows which tiles have been uncovered,
      *                  useful when generating the HTML files
      */
 
     private int mapSize;
+    private int playerNumber;
+    private Position startPosition;
     private Position position;
     private boolean[][] tilesVisited;
 
@@ -22,13 +26,23 @@ public class Player {
      * @param mapSize   - indicates the length of a side of the square map (in tiles),
      *                    used to create the size of the 2d array of tilesVisited
      */
-    public Player (int xCoord, int yCoord, int mapSize){
+    public Player (int xCoord, int yCoord, int mapSize, int playerNumber){
         tilesVisited =  new boolean[mapSize][mapSize];
 
+        startPosition = new Position(xCoord, yCoord);
         position = new Position(xCoord,yCoord);
-        setPosition(getPosition().getX(),getPosition().getY());
+        setPosition(xCoord,yCoord);
 
         this.mapSize = mapSize;
+        this.playerNumber = playerNumber;
+    }
+
+    /**
+     * Used to get the player's starting position
+     * @return position object
+     */
+    public Position getStartPosition() {
+        return startPosition;
     }
 
     /**
@@ -52,6 +66,17 @@ public class Player {
     }
 
     /**
+     * Sets the player's position depending on the parameter below. Also updates the tilesVisited array to include the
+     * new tile uncovered.
+     * @param p - Position opbject representing the coordinates to move to
+     */
+    public void setPosition(Position p){
+        position.setX(p.getX());
+        position.setY(p.getY());
+        tilesVisited[p.getX()][p.getY()] = true;
+    }
+
+    /**
      * Used to get the player's map of visited tiles
      * @return tilesVisited 2d boolean array
      */
@@ -66,6 +91,15 @@ public class Player {
     public void setTilesVisited(boolean[][] newTilesVisited){
         tilesVisited = newTilesVisited;
     }
+
+    /**
+     * Used to get the player's unique identifier
+     * @return playerNumber integer
+     */
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
     /**
      * Tries to move the player 1 tile to the specified direction. If it goes out of the map boundaries or is an
      * invalid character then the player doesn't move. When the move is valid, the player's position is updated.
