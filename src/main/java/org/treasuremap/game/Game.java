@@ -69,6 +69,11 @@ public class Game {
                     default: break;
                 }
             }
+
+            if (winners.size()!=0){
+                declareWinners();
+                exit=true;
+            }
         }
     }
 
@@ -124,5 +129,20 @@ public class Game {
     private static void generateHTMLFiles() {
         for (int i=0; i<players.length; i++)
             new HTMLGeneration(players, i, map, turns);
+    }
+
+    /**
+     * Displays the winners of the game on screen.
+     */
+    private static void declareWinners() {
+        if (winners.size()==1){
+            System.out.println("The winner is Player " + winners.get(0).getPlayerNumber());
+        }
+        else {
+            System.out.print("The winners are: ");
+            for (Player p : winners) {
+                System.out.print("Player " + p.getPlayerNumber() + " ");
+            }
+        }
     }
 }
