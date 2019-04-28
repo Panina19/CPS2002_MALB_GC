@@ -27,14 +27,14 @@ public class Player {
      *                    used to create the size of the 2d array of tilesVisited
      */
     public Player (int xCoord, int yCoord, int mapSize, int playerNumber){
+        this.mapSize = mapSize;
+        this.playerNumber = playerNumber;
+
         tilesVisited =  new boolean[mapSize][mapSize];
 
         startPosition = new Position(xCoord, yCoord);
         position = new Position(xCoord,yCoord);
         setPosition(xCoord,yCoord);
-
-        this.mapSize = mapSize;
-        this.playerNumber = playerNumber;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Player {
     public void setPosition(int x, int y){
         position.setX(x);
         position.setY(y);
-        tilesVisited[x][y] = true;
+        tilesVisited[mapSize - y-1][x] = true;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Player {
     public void setPosition(Position p){
         position.setX(p.getX());
         position.setY(p.getY());
-        tilesVisited[p.getX()][p.getY()] = true;
+        tilesVisited[mapSize - p.getY()][p.getX()] = true;
     }
 
     /**

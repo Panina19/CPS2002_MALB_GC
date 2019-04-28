@@ -132,7 +132,7 @@ public class HTMLGeneration {
     public String getTileColour(int rows, int cols, boolean[][] tilesVisited) {
         Tile tileColour;
         if(tilesVisited[rows][cols]) {
-            tileColour = map.getTileType(rows, cols);
+            tileColour = map.getTileType(cols, map.getSize()-rows-1);
             switch (tileColour){
                 case GRASS: return "bgcolor = #00FF00";
                 case WATER: return "bgcolor = #00FFFF";
@@ -151,7 +151,7 @@ public class HTMLGeneration {
      * @return icon of player or nothing
      */
     public String isPlayerOnTile(int rows, int cols){
-        if(rows == players[playerNo].getPosition().getX() && cols == players[playerNo].getPosition().getY()){
+        if(rows == (map.getSize() - players[playerNo].getPosition().getY()-1) && cols == players[playerNo].getPosition().getX()){
             return "<i class='fas fa-male' style='font-size:24px'></i>";
         }
         return "";

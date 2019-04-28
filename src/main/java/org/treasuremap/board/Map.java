@@ -30,7 +30,7 @@ public class Map {
      * @return the tile found
      */
     public Tile getTileType(int x, int y) {
-        return map[y][x];
+        return map[size-y-1][x];
     }
 
     /**
@@ -39,7 +39,7 @@ public class Map {
      * @return the tile found
      */
     public Tile getTileType(Position p) {
-        return map[p.getY()][p.getX()];
+        return map[size-p.getY()-1][p.getX()];
     }
 
     /**
@@ -68,7 +68,7 @@ public class Map {
                 if (!(map[i][j] == Tile.TREASURE))
                     map[i][j] = r.nextInt(10) < 9 ? Tile.GRASS : Tile.WATER;
                 if (map[i][j] == Tile.GRASS)
-                    grassTiles.add(new Position(j,i));
+                    grassTiles.add(new Position(j,size-i-1));
             }
         }
     }
