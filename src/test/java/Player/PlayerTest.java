@@ -6,10 +6,11 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.treasuremap.board.Position;
 
 public class PlayerTest{
     private Player player;
-
+    private Position pos;
     /**
      * Sets up a new object of type Player, with the size of map as 10 and the player's position at (5,5)
      */
@@ -24,6 +25,7 @@ public class PlayerTest{
     @After
     public void cleanup() {
         player = null;
+        pos = null;
     }
 
     /**
@@ -87,5 +89,47 @@ public class PlayerTest{
         player.move('L');
         Assert.assertEquals(0,player.getPosition().getX());
         Assert.assertEquals(0,player.getPosition().getY());
+    }
+
+    /**
+     * Test to ensure that a start position exists
+     */
+    @Test
+    public void playerValidStartPositionTest(){
+        pos = player.getStartPosition();
+        Assert.assertNotNull(pos);
+    }
+
+    /**
+     * Test to check that the setter of object type Position and integer type (x,y) do indeed work successfully
+     */
+    @Test
+    public void setPositionValidTest(){
+        pos = new Position(1,1);
+        player.setPosition(pos);
+        Assert.assertEquals(1,player.getPosition().getX());
+        Assert.assertEquals(1,player.getPosition().getY());
+
+        player.setPosition(2,2);
+        Assert.assertEquals(2,player.getPosition().getX());
+        Assert.assertEquals(2,player.getPosition().getY());
+    }
+
+    /**
+     * Checks that the player is associated with an assigned player number.
+     */
+
+    @Test
+    public void existingPlayerNumberTest(){
+        Assert.assertNotNull(player.getPlayerNumber());
+    }
+
+    /**
+     * Checks that the player is correctly associated with the assigned player number.
+     */
+
+    @Test
+    public void correctPlayerNumberTest(){
+        Assert.assertEquals(1,player.getPlayerNumber());
     }
 }
