@@ -9,10 +9,22 @@ public class Main {
     private static int mapSize;
     private static Scanner scan;
 
+    /**
+     * This method checks if the number of players joinng the game fits in the limits given in the task overview.
+     * @param playerCount - the number of players joining the game
+     * @return boolean value according to the limits
+     */
     public static boolean validatePlayerCount(int playerCount) {
         return (playerCount>=2 && playerCount<=8);
     }
 
+    /**
+     * This method checks if the map size assigned fits the limits of the scope of the assignment. This depends on
+     * the playerCount variable
+     * @param playerCount - the number of players joining the game
+     * @param mapSize - the size of the map
+     * @return boolean value according to the limits
+     */
     public static boolean validateMapSize(int playerCount, int mapSize) {
         if (playerCount>=2 && playerCount<=4) {
             return (mapSize>=5 && mapSize<=50);
@@ -20,6 +32,9 @@ public class Main {
         else return (mapSize>=8 && mapSize<=50);
     }
 
+    /**
+     * This method is used to gather the initial game information from the user related to the number of players
+     */
     private static void gameQuestionPlayers() {
         System.out.println("How many players?");
         try {
@@ -35,6 +50,9 @@ public class Main {
         }
     }
 
+    /**
+     * This method is used to gather the initial game information from the user related to the size of the map
+     */
     private static void gameQuestionMapSize() {
         System.out.println("How big should the map be?");
         try {
@@ -52,6 +70,9 @@ public class Main {
         }
     }
 
+    /**
+     * Main method, used to gather the initial game information and then run the game.
+     */
     public static void main(String[] args) {
         System.out.println("-- TREASURE MAP --");
         gameQuestionPlayers();
