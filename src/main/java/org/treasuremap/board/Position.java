@@ -73,6 +73,11 @@ public class Position {
         return yCoord;
     }
 
+    /**
+     * Method used in game and tests to indicate if a position object is equal to the current position
+     * @param obj the object to be compared
+     * @return true or false, depending if the object is equal to the current position or not.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
