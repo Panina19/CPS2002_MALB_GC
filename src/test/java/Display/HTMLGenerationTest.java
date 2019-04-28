@@ -80,13 +80,13 @@ public class HTMLGenerationTest {
                 {Tile.GRASS,Tile.WATER,Tile.GRASS,Tile.GRASS,Tile.GRASS}
         };
         map.setMap(tileMap);
-        String colour = htmlGen.getTileColour(0,0,map,tilesVisited);
+        String colour = htmlGen.getTileColour(0,0,tilesVisited);
         assertEquals("bgcolor = #00FF00",colour);
-        colour = htmlGen.getTileColour(1,0,map,tilesVisited);
+        colour = htmlGen.getTileColour(1,0,tilesVisited);
         assertEquals("bgcolor = #00FFFF",colour);
-        colour = htmlGen.getTileColour(2,2,map,tilesVisited);
+        colour = htmlGen.getTileColour(2,2,tilesVisited);
         assertEquals("bgcolor = #FFFF00",colour);
-        colour = htmlGen.getTileColour(1,1,map,tilesVisited);
+        colour = htmlGen.getTileColour(1,1,tilesVisited);
         assertEquals("bgcolor = #C4C4C4",colour);
     }
 
@@ -104,9 +104,9 @@ public class HTMLGenerationTest {
         playerPos.setX(xPos);
         playerPos.setY(yPos);
 
-        String playerMarker = htmlGen.isPlayerOnTile(players, playerNo, xPos, yPos);
+        String playerMarker = htmlGen.isPlayerOnTile(xPos, yPos);
         assertEquals("<i class='fas fa-male' style='font-size:24px'></i>",playerMarker);
-        playerMarker = htmlGen.isPlayerOnTile(players, playerNo, 0, 0);
+        playerMarker = htmlGen.isPlayerOnTile(0, 0);
         assertEquals("",playerMarker);
     }
 }

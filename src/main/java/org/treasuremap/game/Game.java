@@ -5,6 +5,7 @@ import org.treasuremap.Player.Player;
 import org.treasuremap.board.Map;
 import org.treasuremap.board.Position;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -133,7 +134,11 @@ public class Game {
      */
     private static void generateHTMLFiles() {
         for (int i=0; i<players.length; i++)
-            new HTMLGeneration(players, i, map, turns);
+            try {
+                new HTMLGeneration(players, i, map, turns).displayFile();
+            } catch(IOException e){
+                e.printStackTrace();
+            }
     }
 
     /**
