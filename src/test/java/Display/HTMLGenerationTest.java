@@ -32,7 +32,7 @@ public class HTMLGenerationTest {
         turnNo = 1;
         mapSize = 5;
         playerNo = 0;
-        player = new Player(0, 0,mapSize);
+        player = new Player(0, 0,mapSize, 1);
         map = new Map(mapSize);         
         players = new Player[1];
         players[0] = player;
@@ -82,7 +82,7 @@ public class HTMLGenerationTest {
         map.setMap(tileMap);
         String colour = htmlGen.getTileColour(0,0,map,tilesVisited);
         assertEquals("bgcolor = #00FF00",colour);
-        colour = htmlGen.getTileColour(0,1,map,tilesVisited);
+        colour = htmlGen.getTileColour(1,0,map,tilesVisited);
         assertEquals("bgcolor = #00FFFF",colour);
         colour = htmlGen.getTileColour(2,2,map,tilesVisited);
         assertEquals("bgcolor = #FFFF00",colour);
@@ -99,7 +99,7 @@ public class HTMLGenerationTest {
     public void isPlayerOnTileTest(){
         xPos = 0;
         yPos = 3;
-        players[playerNo] = new Player(xPos,yPos,mapSize);
+        players[playerNo] = new Player(xPos,yPos,mapSize, 1);
         playerPos = new Position();
         playerPos.setX(xPos);
         playerPos.setY(yPos);

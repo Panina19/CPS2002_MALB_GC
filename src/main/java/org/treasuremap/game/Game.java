@@ -53,11 +53,12 @@ public class Game {
     private static void loop() {
         while (!exit) {
             turns++;
+            // Request player movement
             for (Player p : players) {
-                // Move player
                 movePlayer(p);
             }
 
+            // Check tiles players moved to
             for (Player p : players) {
                 switch (map.getTileType(p.getPosition())) {
                     case TREASURE:
@@ -70,6 +71,10 @@ public class Game {
                 }
             }
 
+            // Display players' respective map
+            generateHTMLFiles();
+
+            // Declare winners
             if (winners.size()!=0){
                 declareWinners();
                 exit=true;
