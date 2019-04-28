@@ -30,7 +30,7 @@ public class Map {
      * @return the tile found
      */
     public Tile getTileType(int x, int y) {
-        return map[x][y];
+        return map[y][x];
     }
 
     /**
@@ -39,7 +39,7 @@ public class Map {
      * @return the tile found
      */
     public Tile getTileType(Position p) {
-        return map[p.getX()][p.getY()];
+        return map[p.getY()][p.getX()];
     }
 
     /**
