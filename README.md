@@ -11,4 +11,4 @@ mvn clean emma:emma install
 ### Running the program on the Windows terminal
 
 Enter the command in the cmd:
-java -jar target/treasure-map-1.0-SNAPSHOT.jar
+java -jar target/treasure-map-1.0.0.jar
