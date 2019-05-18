@@ -1,8 +1,9 @@
 package org.treasuremap.game;
 
-import org.treasuremap.Display.HTMLGeneration;
-import org.treasuremap.Player.Player;
+import org.treasuremap.display.HTMLGeneration;
+import org.treasuremap.player.Player;
 import org.treasuremap.board.Map;
+import org.treasuremap.board.MapCreator;
 import org.treasuremap.board.Position;
 
 import java.io.IOException;
@@ -24,14 +25,15 @@ public class Game {
      * @param playerCount - number of players joining the game
      * @param mapSize - size of side of the map
      */
-    public static void start(int playerCount, int mapSize) {
+    public static void start(int playerCount, int mapSize, char mapType) {
         turns=0;
         players = new Player[playerCount];
         winners = new ArrayList<Player>();
         exit = false;
 
-        // Generate Map
-        map = new Map(mapSize);
+        // Generate Map, according to the type
+        MapCreator mapCreator = new MapCreator();
+        map = mapCreator.createMap(mapType, mapSize);
 
         // Create Players
         createPlayers(playerCount);
@@ -72,7 +74,7 @@ public class Game {
                 }
             }
 
-            // Display players' respective map
+            // display players' respective map
             generateHTMLFiles();
 
             // Declare winners
@@ -92,7 +94,7 @@ public class Game {
     private static char askMovement(Player p) {
         char movement;
 
-        System.out.println("Movement options: U | D | L | R");
+        System.out.println("Player # "+ p.getPlayerNumber() +", Movement options: U | D | L | R");
         scan = new Scanner(System.in);
         movement = scan.next().charAt(0);
         if (movement=='U' || movement=='D' || movement=='L' || movement=='R')
@@ -104,7 +106,7 @@ public class Game {
     }
 
     /**
-     * Method used to move the player by calling the askMovement method and also the player move method from the Player
+     * Method used to move the player by calling the askMovement method and also the player move method from the player
      * class, if the position remains the same that implies the boundaries of the wall were hit. Thus the method starts
      * over.
      * @param p - the associated player
@@ -123,6 +125,7 @@ public class Game {
      * @param playerCount - the number of players in the game
      */
     private static void createPlayers(int playerCount) {
+        map.oT();
         for (int i=0; i<playerCount; i++) {
             Position p = map.randomGrassPosition();
             players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1);
@@ -146,7 +149,7 @@ public class Game {
      */
     private static void declareWinners() {
         if (winners.size()==1){
-            System.out.println("The winner is Player " + winners.get(0).getPlayerNumber());
+            System.out.println("The winner is player " + winners.get(0).getPlayerNumber());
         }
         else {
             System.out.print("The winners are: ");

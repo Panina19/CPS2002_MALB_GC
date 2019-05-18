@@ -1,4 +1,4 @@
-package org.treasuremap.Player;
+package org.treasuremap.player;
 import org.treasuremap.board.Position;
 
 public class Player {
@@ -20,7 +20,7 @@ public class Player {
     private boolean[][] tilesVisited;
 
     /**
-     * A contructor to create an object of type Player
+     * A contructor to create an object of type player
      * @param xCoord    - indicates the x-coordinate, used to set up the player's position
      * @param yCoord    - indicates the y-coordinate, used to set up the player's position
      * @param mapSize   - indicates the length of a side of the square map (in tiles),

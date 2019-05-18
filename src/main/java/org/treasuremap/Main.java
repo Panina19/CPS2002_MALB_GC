@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
     private static int playerCount;
     private static int mapSize;
+    private static char mapType;
     private static Scanner scan;
 
     /**
@@ -30,6 +31,10 @@ public class Main {
             return (mapSize>=5 && mapSize<=50);
         }
         else return (mapSize>=8 && mapSize<=50);
+    }
+
+    public static boolean validateMapType(char mapType){
+        return (mapType=='H'||mapType=='h'||mapType=='S'||mapType=='s');
     }
 
     /**
@@ -71,12 +76,32 @@ public class Main {
     }
 
     /**
+     * This method requests the type of map to the user, which shall be generated.
+     */
+    private static void gameQuestionMapType() {
+        System.out.println("Choose Map Type: (S)afe or (H)azardous");
+        try {
+            scan = new Scanner(System.in);
+            mapType = scan.next().charAt(0);
+            if (!validateMapType(mapType)){
+                System.out.println("Invalid map type, let's try again!");
+                gameQuestionMapType();
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input, let's try again!");
+            gameQuestionMapType();
+        }
+    }
+
+    /**
      * Main method, used to gather the initial game information and then run the game.
      */
     public static void main(String[] args) {
         System.out.println("-- TREASURE MAP --");
         gameQuestionPlayers();
         gameQuestionMapSize();
-        Game.start(playerCount, mapSize);
+        gameQuestionMapType();
+        Game.start(playerCount, mapSize, mapType);
     }
+
 }

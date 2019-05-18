@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.treasuremap.board.Map;
+import org.treasuremap.board.maptypes.SafeMap;
 import org.treasuremap.board.Tile;
 
 import static org.junit.Assert.fail;
@@ -18,7 +19,7 @@ public class MapTest {
      */
     @Before
     public void setup() {
-        map = new Map(10);
+        map = new SafeMap(10);
     }
 
     /**
