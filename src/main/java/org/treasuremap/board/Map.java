@@ -88,7 +88,4 @@ public abstract class Map {
         return type;
     }
 
-    public void oT() {
-        System.out.println(grassTiles.size() + " grass tiles");
-    }
 }

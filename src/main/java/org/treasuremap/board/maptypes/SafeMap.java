@@ -7,6 +7,8 @@ import org.treasuremap.board.Tile;
 import java.util.Random;
 
 public class SafeMap extends Map {
+    private static SafeMap singInstance = null;
+
     /**
      * Constructor which creates a new square map of tiles with length of size of size and initially an empty grass
      * tile arraylist. Also runs the generate method to run the associated functions which shal be explained later on.
@@ -18,6 +20,18 @@ public class SafeMap extends Map {
         type = "Safe";
     }
 
+    /**
+     * This method retrieve the immutable instance of the safe map in the system. If no instance exists it creates one
+     * using the mapSize.
+     * @param mapSize - possesses the size of the map to be created, if no instance exists
+     * @returns the instance of the safe map
+     */
+    public static SafeMap getOrCreateSingleInstance(int mapSize){
+        if (singInstance == null){ //if no instance has been created, create a new one
+            singInstance = new SafeMap(mapSize);
+        }
+        return singInstance; //return the immutable instance
+    }
     /**
      * Generates the map, by randomly positioning the treasure tile. Next goes through the different tiles available and
      * fills them as grass or water tiles with a 90% and 10% chance respectively. When a grass tile is added it is also

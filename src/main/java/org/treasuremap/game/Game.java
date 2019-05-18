@@ -125,7 +125,6 @@ public class Game {
      * @param playerCount - the number of players in the game
      */
     private static void createPlayers(int playerCount) {
-        map.oT();
         for (int i=0; i<playerCount; i++) {
             Position p = map.randomGrassPosition();
             players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1);

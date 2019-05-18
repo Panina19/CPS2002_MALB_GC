@@ -7,6 +7,7 @@ import org.treasuremap.board.Tile;
 import java.util.Random;
 
 public class HazardousMap extends Map {
+    private static HazardousMap singInstance = null;
     /**
      * Constructor which creates a new square map of tiles with length of size of size and initially an empty grass
      * tile arraylist. Also runs the generate method to run the associated functions which shal be explained later on.
@@ -16,6 +17,18 @@ public class HazardousMap extends Map {
     public HazardousMap(int size) {
         super(size);
         type = "Hazardous";
+    }
+    /**
+     * This method retrieve the immutable instance of the hazardous map in the system. If no instance exists it creates
+     * one using the mapSize.
+     * @param mapSize - possesses the size of the map to be created, if no instance exists
+     * @returns the instance of the hazardous map
+     */
+    public static HazardousMap getOrCreateSingleInstance(int mapSize){
+        if (singInstance == null){ //if no instance has yet been created
+            singInstance = new HazardousMap(mapSize); //create a new one
+        }
+        return singInstance;//show our only immutable instance
     }
 
     /**
