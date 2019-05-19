@@ -9,6 +9,30 @@ public class Main {
     private static int mapSize;
     private static char mapType;
     private static Scanner scan;
+    private static int teamCount;
+
+    private static void gameQuestionMode() {
+        System.out.println("Play in co-op mode? (Y)es - (N)o");
+        try {
+            scan = new Scanner(System.in);
+            char mode = scan.next().charAt(0);
+            if (mode == 'Y') {
+                System.out.println("How many teams?");
+                teamCount=scan.nextInt();
+                if (teamCount>playerCount) {
+                    System.out.println("Cannot have more teams than players.");
+                    throw new Exception();
+                }
+            }
+            else if (mode == 'N') {
+                teamCount=playerCount;
+            }
+            else throw new Exception();
+        } catch (Exception e) {
+            System.out.println("Invalid input, let's try that again!");
+            gameQuestionMode();
+        }
+    }
 
     /**
      * This method checks if the number of players joinng the game fits in the limits given in the task overview.
@@ -99,9 +123,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("-- TREASURE MAP --");
         gameQuestionPlayers();
+        gameQuestionMode();
         gameQuestionMapSize();
         gameQuestionMapType();
-        Game.start(playerCount, mapSize, mapType);
+        Game.start(playerCount, mapSize, mapType, teamCount);
     }
 
 }

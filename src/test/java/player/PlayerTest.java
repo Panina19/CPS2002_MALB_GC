@@ -143,6 +143,6 @@ public class PlayerTest{
         player.register(player2);
 
         player.notifyObservers();
-        Assert.assertTrue(player2.getTilesVisited()[5][5]);
+        Assert.assertTrue(player2.getTilesVisited()[4][5]);
     }
 }

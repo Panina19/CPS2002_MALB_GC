@@ -83,7 +83,7 @@ public class Player implements Observer, Subject {
     public void setPosition(Position p){
         position.setX(p.getX());
         position.setY(p.getY());
-        tilesVisited[mapSize - p.getY()][p.getX()] = true;
+        tilesVisited[mapSize - p.getY()-1][p.getX()] = true;
     }
 
     /**
@@ -108,6 +108,14 @@ public class Player implements Observer, Subject {
      */
     public int getPlayerNumber() {
         return playerNumber;
+    }
+
+    /**
+     * Used to get the player's team number
+     * @return
+     */
+    public int getTeamNumber() {
+        return teamNumber;
     }
 
     /**
@@ -156,7 +164,7 @@ public class Player implements Observer, Subject {
      */
     public void update(int teamNumber, Position pos) {
         if (this.teamNumber==teamNumber)
-            tilesVisited[mapSize - pos.getY()][pos.getX()] = true;
+            tilesVisited[mapSize - pos.getY()-1][pos.getX()] = true;
     }
 
     /**
