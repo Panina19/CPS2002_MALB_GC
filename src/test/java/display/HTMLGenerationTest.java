@@ -33,7 +33,7 @@ public class HTMLGenerationTest {
         turnNo = 1;
         mapSize = 5;
         playerNo = 0;
-        player = new Player(0, 0,mapSize, 1);
+        player = new Player(0, 0,mapSize, 1, 1);
         map = new HazardousMap(mapSize);
         players = new Player[1];
         players[0] = player;
@@ -100,7 +100,7 @@ public class HTMLGenerationTest {
     public void isPlayerOnTileTest(){
         xPos = 0;
         yPos = 3;
-        players[playerNo] = new Player(xPos,yPos,mapSize, 1);
+        players[playerNo] = new Player(xPos,yPos,mapSize, 1, 1);
         playerPos = new Position();
         playerPos.setX(xPos);
         playerPos.setY(yPos);

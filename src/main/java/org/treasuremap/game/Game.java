@@ -127,7 +127,7 @@ public class Game {
     private static void createPlayers(int playerCount) {
         for (int i=0; i<playerCount; i++) {
             Position p = map.randomGrassPosition();
-            players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1);
+            players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1, 1);
         }
     }
 
