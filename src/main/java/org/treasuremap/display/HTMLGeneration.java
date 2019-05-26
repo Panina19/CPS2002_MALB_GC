@@ -1,6 +1,6 @@
-package org.treasuremap.Display;
+package org.treasuremap.display;
 
-import org.treasuremap.Player.Player;
+import org.treasuremap.player.Player;
 import org.treasuremap.board.Map;
 import org.treasuremap.board.Tile;
 

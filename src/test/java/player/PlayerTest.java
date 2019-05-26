@@ -1,6 +1,6 @@
-package Player;
+package player;
 
-import org.treasuremap.Player.Player;
+import org.treasuremap.player.Player;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -12,11 +12,11 @@ public class PlayerTest{
     private Player player;
     private Position pos;
     /**
-     * Sets up a new object of type Player, with the size of map as 10 and the player's position at (5,5)
+     * Sets up a new object of type player, with the size of map as 10 and the player's position at (5,5)
      */
     @Before
     public void setup() {
-        player = new Player(5,5,10, 1);
+        player = new Player(5,5,10, 1, 1);
     }
 
     /**
@@ -131,5 +131,18 @@ public class PlayerTest{
     @Test
     public void correctPlayerNumberTest(){
         Assert.assertEquals(1,player.getPlayerNumber());
+    }
+
+    /**
+     * Checks that players in the same team can see each other's tiles when notified
+     */
+    @Test
+    public void notifyUpdatesAllTeamTiles() {
+        Player player2 = new Player(0,0,10,2,1);
+        player2.register(player);
+        player.register(player2);
+
+        player.notifyObservers();
+        Assert.assertTrue(player2.getTilesVisited()[4][5]);
     }
 }

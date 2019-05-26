@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Map {
-    private int size; //size of map (length of side)
-    private Tile[][] map; //2d array of type Tiles, denoting the tile types per map tile
-    private List<Position> grassTiles;  //list of different position of grass tiles, useful for the start position
+public abstract class Map {
+    protected int size; //size of map (length of side)
+    protected Tile[][] map; //2d array of type Tiles, denoting the tile types per map tile
+    protected List<Position> grassTiles;  //list of different position of grass tiles, useful for the start position
                                         // ensuring a player can land/start from there
+    protected String type;
+
+    public abstract void generate();
 
     /**
      * Constructor which creates a new square map of tiles with length of size of size and initially an empty grass
@@ -53,27 +56,6 @@ public class Map {
     }
 
     /**
-     * Generates the map, by randomly positioning the treasure tile. Next goes through the different tiles available and
-     * fills them as grass or water tiles with a 90% and 10% chance respectively. When a grass tile is added it is also
-     * added in the list of grassTiles.
-     */
-    private void generate() {
-        // Set Treasure location
-        Random r = new Random();
-        map[r.nextInt(size)][r.nextInt(size)] = Tile.TREASURE;
-
-        // Set all other tiles (90% grass) (10% water)
-        for (int i=0; i<size; i++) {
-            for (int j=0; j<size; j++) {
-                if (!(map[i][j] == Tile.TREASURE))
-                    map[i][j] = r.nextInt(10) < 9 ? Tile.GRASS : Tile.WATER;
-                if (map[i][j] == Tile.GRASS)
-                    grassTiles.add(new Position(j,size-i-1));
-            }
-        }
-    }
-
-    /**
      * The use of this is to retrieve the map size, essential for the player and HTML generation file classes.
      * @return the size of the map
      */
@@ -98,4 +80,12 @@ public class Map {
             map = tileMap;
         }
     }
+    /**
+     * This method is used for tests to retrieve the map property of type
+     * @return type: the map type
+     */
+    public String getType(){
+        return type;
+    }
+
 }

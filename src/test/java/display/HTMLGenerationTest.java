@@ -1,11 +1,12 @@
-package Display;
+package display;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.treasuremap.Display.HTMLGeneration;
-import org.treasuremap.Player.Player;
+import org.treasuremap.display.HTMLGeneration;
+import org.treasuremap.player.Player;
 import org.treasuremap.board.Map;
+import org.treasuremap.board.maptypes.HazardousMap;
 import org.treasuremap.board.Position;
 import org.treasuremap.board.Tile;
 
@@ -32,8 +33,8 @@ public class HTMLGenerationTest {
         turnNo = 1;
         mapSize = 5;
         playerNo = 0;
-        player = new Player(0, 0,mapSize, 1);
-        map = new Map(mapSize);         
+        player = new Player(0, 0,mapSize, 1, 1);
+        map = new HazardousMap(mapSize);
         players = new Player[1];
         players[0] = player;
         htmlGen = new HTMLGeneration(players, playerNo, map, turnNo);
@@ -99,7 +100,7 @@ public class HTMLGenerationTest {
     public void isPlayerOnTileTest(){
         xPos = 0;
         yPos = 3;
-        players[playerNo] = new Player(xPos,yPos,mapSize, 1);
+        players[playerNo] = new Player(xPos,yPos,mapSize, 1, 1);
         playerPos = new Position();
         playerPos.setX(xPos);
         playerPos.setY(yPos);

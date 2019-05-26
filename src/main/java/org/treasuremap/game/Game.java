@@ -1,8 +1,9 @@
 package org.treasuremap.game;
 
-import org.treasuremap.Display.HTMLGeneration;
-import org.treasuremap.Player.Player;
+import org.treasuremap.display.HTMLGeneration;
+import org.treasuremap.player.Player;
 import org.treasuremap.board.Map;
+import org.treasuremap.board.MapCreator;
 import org.treasuremap.board.Position;
 
 import java.io.IOException;
@@ -17,24 +18,38 @@ public class Game {
     private static Map map;
     private static boolean exit;
     private static Scanner scan;
+    private static int teams;
 
     /**
      * Method used to start the game, by setting global variable exit as false (since its not signalled to be
      * terminated yet), creating an array of players, a new map and calling the respective functions.
      * @param playerCount - number of players joining the game
      * @param mapSize - size of side of the map
+     * @param mapType - the type of map
+     * @param teamCount - the number of teams
      */
-    public static void start(int playerCount, int mapSize) {
+    public static void start(int playerCount, int mapSize, char mapType, int teamCount) {
         turns=0;
         players = new Player[playerCount];
         winners = new ArrayList<Player>();
+        teams = teamCount;
         exit = false;
 
-        // Generate Map
-        map = new Map(mapSize);
+        // Generate Map, according to the type
+        MapCreator mapCreator = new MapCreator();
+        map = mapCreator.createMap(mapType, mapSize);
 
         // Create Players
         createPlayers(playerCount);
+
+        // Register players in the same teams as each other's observers
+        for (Player p1 : players) {
+            for (Player p2 : players) {
+                if (p1.getTeamNumber() == p2.getTeamNumber())
+                    p1.register(p2);
+            }
+            p1.notifyObservers(); // Notifies starting position
+        }
 
         // Generate HTML files for each player
         generateHTMLFiles();
@@ -72,7 +87,7 @@ public class Game {
                 }
             }
 
-            // Display players' respective map
+            // display players' respective map
             generateHTMLFiles();
 
             // Declare winners
@@ -92,7 +107,7 @@ public class Game {
     private static char askMovement(Player p) {
         char movement;
 
-        System.out.println("Movement options: U | D | L | R");
+        System.out.println("Player # "+ p.getPlayerNumber() +", Movement options: U | D | L | R");
         scan = new Scanner(System.in);
         movement = scan.next().charAt(0);
         if (movement=='U' || movement=='D' || movement=='L' || movement=='R')
@@ -104,7 +119,7 @@ public class Game {
     }
 
     /**
-     * Method used to move the player by calling the askMovement method and also the player move method from the Player
+     * Method used to move the player by calling the askMovement method and also the player move method from the player
      * class, if the position remains the same that implies the boundaries of the wall were hit. Thus the method starts
      * over.
      * @param p - the associated player
@@ -125,7 +140,7 @@ public class Game {
     private static void createPlayers(int playerCount) {
         for (int i=0; i<playerCount; i++) {
             Position p = map.randomGrassPosition();
-            players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1);
+            players[i] = new Player(p.getX(), p.getY(), map.getSize(), i+1, (i+1)%teams);
         }
     }
 
@@ -145,8 +160,17 @@ public class Game {
      * Displays the winners of the game on screen.
      */
     private static void declareWinners() {
+        List<Player> alsoWinners = new ArrayList<Player>();
+        for (Player winner : winners) {
+            for (Player p : players) {
+                if (winner!=p && winner.getTeamNumber()==p.getTeamNumber())
+                    alsoWinners.add(p);
+            }
+        }
+        winners.addAll(alsoWinners);
+
         if (winners.size()==1){
-            System.out.println("The winner is Player " + winners.get(0).getPlayerNumber());
+            System.out.println("The winner is player " + winners.get(0).getPlayerNumber());
         }
         else {
             System.out.print("The winners are: ");

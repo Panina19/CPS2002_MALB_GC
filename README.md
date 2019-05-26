@@ -5,10 +5,10 @@ This assignment was done by Matthew Alan Le Brun & Gabriel Camilleri
 ## Instructions
 ### Getting the JAR File
 
-Enter the command in the cmd:
+Navigate to the project root folder and enter the following command in the cmd:
 mvn clean emma:emma install
 
 ### Running the program on the Windows terminal
 
-Enter the command in the cmd:
-java -jar target/treasure-map-1.0.0.jar
+Remaining in the root folder enter the following command in the cmd:
+java -jar target/treasure-map-2.0.jar

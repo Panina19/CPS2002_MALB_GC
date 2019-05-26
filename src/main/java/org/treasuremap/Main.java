@@ -7,7 +7,32 @@ import java.util.Scanner;
 public class Main {
     private static int playerCount;
     private static int mapSize;
+    private static char mapType;
     private static Scanner scan;
+    private static int teamCount;
+
+    private static void gameQuestionMode() {
+        System.out.println("Play in co-op mode? (Y)es - (N)o");
+        try {
+            scan = new Scanner(System.in);
+            char mode = scan.next().charAt(0);
+            if (mode == 'Y') {
+                System.out.println("How many teams?");
+                teamCount=scan.nextInt();
+                if (teamCount>playerCount) {
+                    System.out.println("Cannot have more teams than players.");
+                    throw new Exception();
+                }
+            }
+            else if (mode == 'N') {
+                teamCount=playerCount;
+            }
+            else throw new Exception();
+        } catch (Exception e) {
+            System.out.println("Invalid input, let's try that again!");
+            gameQuestionMode();
+        }
+    }
 
     /**
      * This method checks if the number of players joinng the game fits in the limits given in the task overview.
@@ -30,6 +55,10 @@ public class Main {
             return (mapSize>=5 && mapSize<=50);
         }
         else return (mapSize>=8 && mapSize<=50);
+    }
+
+    public static boolean validateMapType(char mapType){
+        return (mapType=='H'||mapType=='h'||mapType=='S'||mapType=='s');
     }
 
     /**
@@ -71,12 +100,33 @@ public class Main {
     }
 
     /**
+     * This method requests the type of map to the user, which shall be generated.
+     */
+    private static void gameQuestionMapType() {
+        System.out.println("Choose Map Type: (S)afe or (H)azardous");
+        try {
+            scan = new Scanner(System.in);
+            mapType = scan.next().charAt(0);
+            if (!validateMapType(mapType)){
+                System.out.println("Invalid map type, let's try again!");
+                gameQuestionMapType();
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input, let's try again!");
+            gameQuestionMapType();
+        }
+    }
+
+    /**
      * Main method, used to gather the initial game information and then run the game.
      */
     public static void main(String[] args) {
         System.out.println("-- TREASURE MAP --");
         gameQuestionPlayers();
+        gameQuestionMode();
         gameQuestionMapSize();
-        Game.start(playerCount, mapSize);
+        gameQuestionMapType();
+        Game.start(playerCount, mapSize, mapType, teamCount);
     }
+
 }
